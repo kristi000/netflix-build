@@ -1,5 +1,6 @@
 import React, { useState } from "react"
 import "./SignUpScreen.css"
+
 function SignUpScreen() {
   const [signIn, setSignIn] = useState(false)
   return (
