@@ -1,21 +1,55 @@
-import React, { useState } from "react"
+import React, { useRef, useState } from "react"
+import { auth } from "../firebase"
+
 import "./SignUpScreen.css"
 
 function SignUpScreen() {
-  const [signIn, setSignIn] = useState(false)
+  const emailRef = useRef(null)
+  const passwordRef = useRef(null)
+
+  const register = (e) => {
+    e.preventDefault()
+
+    auth
+      .createUserWithEmailAndPassword(
+        emailRef.current.value,
+        passwordRef.current.value
+      )
+      .then((authUser) => {
+        console.log(authUser)
+      })
+      .catch((error) => {
+        alert(error.message)
+      })
+  }
+
+  const signIn = (e) => {
+    e.preventDefault()
+
+    auth
+      .signInWithEmailAndPassword(
+        emailRef.current.value,
+        passwordRef.current.value
+      )
+      .then((authUser) => {
+        console.log(authUser)
+      })
+      .catch((error) => {
+        alert(error.message)
+      })
+  }
+
   return (
     <div className="signupScreen">
       <h1>Sign Up</h1>
       <div className="signupScreenInput">
         <form>
-          <input type="email" placeholder="Email Address" />
-          <input type="password" placeholder="Password" />
+          <input ref={emailRef} type="email" placeholder="Email Address" />
+          <input ref={passwordRef} type="password" placeholder="Password" />
           <button type="submit">Sign Up</button>
           <h4>
             <span className="signupScreenGray"> New to Netflix? </span>
-            <span className="signupScreenLink" onClick={() => setSignIn(true)}>
-              Sign In now.
-            </span>
+            <span className="signupScreenLink">Sign In now.</span>
           </h4>
         </form>
       </div>
