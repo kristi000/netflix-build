@@ -8,7 +8,7 @@ import { auth } from "./firebase"
 import { useDispatch, useSelector } from "react-redux"
 import { login, logout, selectUser } from "./features/userSlice"
 import ProfileScreen from "./screens/ProfileScreen"
-
+// no update to this file
 function App() {
   const user = useSelector(selectUser)
   const dispatch = useDispatch()
